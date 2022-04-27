@@ -19,12 +19,6 @@ inline fun <reified T : Any> Application.loadConfig(vararg resources: String = a
         .build()
         .loadConfigOrThrow(*resources)
 
-inline fun <reified T : Any> loadConfig(resource: String = "/application.yml"): T =
-    ConfigLoader.builder()
-        .addFileExtensionMapping("yml", YamlParser())
-        .build()
-        .loadConfigOrThrow(resource)
-
 /**
  * Add Ktors MapApplicationConfig as PropertySource,
  * this allows the MapApplicationConfig to override config values in tests
