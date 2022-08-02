@@ -1,24 +1,38 @@
-name: Deploy Topic
+name: Deploy Topics
 
 on:
   push:
     branches:
       - main
     paths:
-      - '.nais/topic-meldeplikt.yml'
+      - '.nais/topic-*.yml'
       - '.github/workflows/deploy-topics.yml'
+      - '.nais/dev.yml'
+      - '.nais/prod.yml'
 
 jobs:
-  deploy-meldeplikt:
-    name: Deploy meldeplikt
+  deploy:
+    strategy:
+      matrix:
+        name:
+          - topic-meldeplikt.yml
+        cluster:
+          - dev-gcp
+          - prod-gcp
+        include:
+          - cluster: dev-gcp
+            vars: dev.yml
+          - cluster: prod-gcp
+            vars: prod.yml
+    name: Deploy ${{ matrix.name }} to ${{ matrix.cluster }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy aap.meldeplikt.v1 to dev
+      - name: Deploy ${{ matrix.name }} to ${{ matrix.cluster }}
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: .nais/topic-meldeplikt.yml
-          VARS: .nais/dev.yml
+          CLUSTER: ${{ matrix.cluster }}
+          RESOURCE: .nais/${{ matrix.name }}
+          VARS: .nais/${{ matrix.vars }}
           PRINT_PAYLOAD: true
