@@ -6,15 +6,16 @@ metadata:
   labels:
     team: aap
   annotations:
-    # Revurder om topic skal slettes sammen med kubernetesressursen når topic opprettes i prod
-    kafka.nais.io/removeDataWhenResourceIsDeleted: "true"
-    githubUrl: "https://github.com/navikt/aap-meldeplikt"
+    kafka.nais.io/removeDataWhenResourceIsDeleted: "{{kafka.permanent-delete-topics}}"
+    kafka.format: json
+    kafka.state: "false"
+    github.url: https://github.com/navikt/aap-meldeplikt
 spec:
-  pool: {{kafka-pool}}
+  pool: {{kafka.pool}}
   config:
     cleanupPolicy: compact,delete
     partitions: 12
-    retentionHours: 1
+    retentionHours: 168
   acl:
     - team: aap
       application: meldeplikt
@@ -22,3 +23,8 @@ spec:
     - team: aap
       application: utbetaling
       access: read
+  {{#each kafka.acl.dev as |dev|}}
+    - team: "{{dev.team}}"
+      application: "{{dev.application}}"
+      access: "{{dev.access}}"
+  {{/each}}
