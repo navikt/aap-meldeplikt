@@ -1,4 +1,4 @@
-package no.nav.aap
+package meldeplikt
 
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -8,7 +8,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
-import meldeplikt.Config
 import no.nav.aap.kafka.streams.v2.KStreams
 import no.nav.aap.kafka.streams.v2.KafkaStreams
 import no.nav.aap.ktor.config.loadConfig
