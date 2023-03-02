@@ -21,7 +21,7 @@ spec:
       cpu: 500m
       memory: 512Mi
   kafka:
-    pool: {{kafka-pool}}
+    pool: {{kafka.pool}}
     streams: true
   liveness:
     path: /actuator/healthy
