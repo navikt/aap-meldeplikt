@@ -1,4 +1,4 @@
-package no.nav.aap.meldeplikt
+package meldeplikt.dto
 
 import java.time.LocalDate
 

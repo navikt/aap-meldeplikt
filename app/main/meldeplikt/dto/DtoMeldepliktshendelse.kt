@@ -1,4 +1,4 @@
-package no.nav.aap.meldeplikt
+package meldeplikt.dto
 
 data class DtoMeldepliktshendelse(
     val aktivitetPerDag: List<DtoAkivitetPerDag>

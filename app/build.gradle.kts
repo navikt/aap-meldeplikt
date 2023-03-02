@@ -1,18 +1,18 @@
-val aapLibVersion = "3.1.5"
-val ktorVersion = "2.0.3"
+val aapLibVersion = "3.6.25"
+val ktorVersion = "2.2.4"
 
 plugins {
-    id("com.github.johnrengelman.shadow")
-    application
+    kotlin("jvm") version "1.8.10"
+    id("io.ktor.plugin") version "2.2.4"
 }
 
 application {
-    mainClass.set("no.nav.aap.AppKt")
+    mainClass.set("meldeplikt.AppKt")
 }
 
 dependencies {
     implementation("com.github.navikt.aap-libs:ktor-utils:$aapLibVersion")
-    implementation("com.github.navikt.aap-libs:kafka:$aapLibVersion")
+    implementation("com.github.navikt.aap-libs:kafka-2:$aapLibVersion")
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
@@ -28,6 +28,26 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3")
 
     testImplementation(kotlin("test"))
-    testImplementation("com.github.navikt.aap-libs:kafka-test:$aapLibVersion")
+    testImplementation("com.github.navikt.aap-libs:kafka-test-2:$aapLibVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
 }
+
+repositories {
+    mavenCentral()
+    maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
+}
+
+tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "19"
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
+}
+
+kotlin.sourceSets["main"].kotlin.srcDirs("main")
+kotlin.sourceSets["test"].kotlin.srcDirs("test")
+sourceSets["main"].resources.srcDirs("main")
+sourceSets["test"].resources.srcDirs("test")
