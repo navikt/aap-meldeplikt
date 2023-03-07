@@ -1,6 +1,3 @@
-val aapLibVersion = "3.6.25"
-val ktorVersion = "2.2.4"
-
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.4"
@@ -9,6 +6,9 @@ plugins {
 application {
     mainClass.set("meldeplikt.AppKt")
 }
+
+val aapLibVersion = "3.6.30"
+val ktorVersion = "2.2.4"
 
 dependencies {
     implementation("com.github.navikt.aap-libs:ktor-utils:$aapLibVersion")
