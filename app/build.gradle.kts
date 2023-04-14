@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.20"
     id("io.ktor.plugin") version "2.2.4"
 }
 
@@ -7,7 +7,7 @@ application {
     mainClass.set("meldeplikt.AppKt")
 }
 
-val aapLibVersion = "3.6.30"
+val aapLibVersion = "3.7.12"
 val ktorVersion = "2.2.4"
 
 dependencies {
@@ -18,13 +18,13 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
 
     implementation("io.ktor:ktor-server-metrics-micrometer:$ktorVersion")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.9.2")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.10.5")
 
     implementation("ch.qos.logback:logback-classic:1.4.6")
-    runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.2")
+    runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.3")
 
-    implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
 
     testImplementation(kotlin("test"))
