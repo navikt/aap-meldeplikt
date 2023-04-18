@@ -7,7 +7,7 @@ application {
     mainClass.set("meldeplikt.AppKt")
 }
 
-val aapLibVersion = "3.7.16"
+val aapLibVersion = "3.7.18"
 val ktorVersion = "2.2.4"
 
 dependencies {
