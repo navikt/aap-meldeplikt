@@ -20,7 +20,7 @@ dependencies {
     implementation("io.ktor:ktor-server-metrics-micrometer:$ktorVersion")
     implementation("io.micrometer:micrometer-registry-prometheus:1.11.2")
 
-    implementation("ch.qos.logback:logback-classic:1.4.10")
+    implementation("ch.qos.logback:logback-classic:1.4.11")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.4")
 
     implementation("com.fasterxml.jackson.core:jackson-core:2.15.2")
